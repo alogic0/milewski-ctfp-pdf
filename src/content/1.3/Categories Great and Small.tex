@@ -182,46 +182,6 @@ is described as \newterm{point-free}. (Incidentally, point-free equations
 often involve composition of functions, which is symbolized by a point,
 so this might be a little confusing to the beginner.)
 
-The closest one can get to declaring a monoid in C++ would be to use the
-(proposed) syntax for concepts.
-
-\begin{Verbatim}
-template<class T>
-  T mempty = delete;
-  
-template<class T>
-  T mappend(T, T) = delete;
-  
-template<class M> 
-  concept bool Monoid = requires (M m) { 
-    { mempty<M> } -> M; 
-    { mappend(m, m); } -> M;
-  };
-\end{Verbatim}
-The first definition uses a value template (also proposed). A
-polymorphic value is a family of values --- a different value for every
-type.
-
-The keyword \code{delete} means that there is no default value
-defined: It will have to be specified on a case-by-case basis.
-Similarly, there is no default for \code{mappend}.
-
-The concept \code{Monoid} is a predicate (hence the \code{bool}
-type) that tests whether there exist appropriate definitions of
-\code{mempty} and \code{mappend} for a given type \code{M}.
-
-An instantiation of the Monoid concept can be accomplished by providing
-appropriate specializations and overloads:
-
-\begin{Verbatim}
-template<>
-std::string mempty<std::string> = {""};
-
-std::string mappend(std::string s1, std::string s2) { 
-    return s1 + s2;
-}
-\end{Verbatim}
-
 \section{Monoid as Category}\label{monoid-as-category}
 
 That was the ``familiar'' definition of the monoid in terms of elements
