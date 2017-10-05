@@ -416,12 +416,7 @@ to unit type? Of course we'll call it \code{unit}:
 unit :: a -> ()
 unit _ = ()
 \end{Verbatim}
-In C++ you would write this function as:
 
-\begin{Verbatim}
-template<class T>
-void unit(T) {}
-\end{Verbatim}
 Next in the typology of types is a two-element set. In C++ it's called
 \code{bool} and in Haskell, predictably, \code{Bool}. The difference
 is that in C++ \code{bool} is a built-in type, whereas in Haskell it
@@ -431,20 +426,7 @@ can be defined as follows:
 data Bool = True | False
 \end{Verbatim}
 (The way to read this definition is that \code{Bool} is either
-\code{True} or \code{False}.) In principle, one should also be able
-to define a Boolean type in C++ as an enumeration:
-
-\begin{Verbatim}
-enum bool { 
-    true,
-    false
-};
-\end{Verbatim}
-but C++ \code{enum} is secretly an integer. The C++11
-``\code{enum class}'' could have been used instead, but then you
-would have to qualify its values with the class name, as in
-\code{bool::true} and \code{bool::false}, not to mention having to
-include the appropriate header in every file that uses it.
+\code{True} or \code{False}.) 
 
 Pure functions from \code{Bool} just pick two values from the target
 type, one corresponding to \code{True} and another to \code{False}.
